@@ -2,7 +2,7 @@ export default [
   {
     id: 1,
     question: "Javascript is an _______ language",
-    options: ["Object-Oriented", "Object-Based", "Procedural", "Chicken"],
+    options: ["Object-Oriented", "Object-Based", "Procedural"],
   },
   {
     id: 2,
@@ -28,3 +28,5 @@ export default [
     options: ["stringify()", "parse()", "convert()"],
   },
 ];
+
+export const answers = [0, 1, 2, 1, 0];

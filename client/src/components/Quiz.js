@@ -14,13 +14,6 @@ export default function Quiz() {
   const { queue, trace } = useSelector((state) => state.questions);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(result);
-    //print out two reducers questions and results
-    //questions has properties of queue and answers and trace
-    //results has UserId and result
-  });
-
   //next button evt handler
   function onNext() {
     //console.log("On next click");
@@ -33,6 +26,9 @@ export default function Quiz() {
         dispatch(PushAnswer(check));
       }
     }
+
+    //reset the value of the checked variable
+    setChecked(undefined);
   }
 
   //previous button evt handler

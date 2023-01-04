@@ -12,6 +12,8 @@ export default function Questions({ onChecked }) {
 
   const [{ isLoading, apiData, serverError }] = useFetchQuestion(); //will return array
 
+  useSelector((state) => console.log(state));
+
   const questions = useSelector(
     (state) => state.questions.queue[state.questions.trace]
   ); //will return array of questions
