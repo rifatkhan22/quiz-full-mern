@@ -13,7 +13,7 @@ export default function Questions() {
   const trace = useSelector((state) => state.questions.trace);
 
   useEffect(() => {
-    console.log(trace);
+    //console.log(trace);
     //print out two reducers questions and results
     //questions has properties of queue and answers and trace
     //results has UserId and result
@@ -24,7 +24,7 @@ export default function Questions() {
   }
   if (isLoading) return <h3 className="text-light">isLoading</h3>;
   if (serverError)
-    return <h3 className="text-light">{serverError || "Unknown"}</h3>;
+    return <h3 className="text-light">{serverError || "Unknown Error"}</h3>;
 
   //only access the property when we have that property
   return (
@@ -32,7 +32,7 @@ export default function Questions() {
       <h2 className="text-light">{questions?.question}</h2>
 
       <ul key={questions?.id}>
-        {questions.options.map((q, i) => (
+        {questions?.options.map((q, i) => (
           <li key={i}>
             <input
               type="radio"

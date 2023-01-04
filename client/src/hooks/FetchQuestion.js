@@ -13,10 +13,11 @@ export const useFetchQuestion = () => {
     apiData: [],
     serverError: null,
   });
+
   useEffect(() => {
     setGetData((prev) => ({ ...prev, isLoading: true }));
 
-    //async function fetch backend data
+    /** async function fetch backend data */
     (async () => {
       try {
         let question = await data;
@@ -25,10 +26,10 @@ export const useFetchQuestion = () => {
           setGetData((prev) => ({ ...prev, isLoading: false }));
           setGetData((prev) => ({ ...prev, apiData: question }));
 
-          //dispatch an action and update the store
+          /** dispatch an action */
           dispatch(Action.startExamAction(question));
         } else {
-          throw new Error("No Question is Avaliable");
+          throw new Error("No Question Avalibale");
         }
       } catch (error) {
         setGetData((prev) => ({ ...prev, isLoading: false }));
@@ -36,5 +37,24 @@ export const useFetchQuestion = () => {
       }
     })();
   }, [dispatch]);
+
   return [getData, setGetData];
+};
+
+/** MoveAction Dispatch function */
+export const MoveNextQuestion = () => async (dispatch) => {
+  try {
+    dispatch(Action.moveNextAction()); /** increase trace by 1 */
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/** PrevAction Dispatch function */
+export const MovePrevQuestion = () => async (dispatch) => {
+  try {
+    dispatch(Action.movePrevAction()); /** decrease trace by 1 */
+  } catch (error) {
+    console.log(error);
+  }
 };
