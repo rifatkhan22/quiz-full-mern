@@ -37,7 +37,6 @@ export default function Quiz() {
 
   //previous button evt handler
   function onPrevious() {
-    //console.log("On previous click");
     if (trace > 0) {
       dispatch(MovePrevQuestion());
     }
@@ -57,9 +56,13 @@ export default function Quiz() {
       <h1 className="title text-light">Quiz App</h1>
       <Questions onChecked={onChecked} />
       <div className="grid">
-        <button className="btn prev" onClick={onPrevious}>
-          Previous
-        </button>
+        {trace > 0 ? (
+          <button className="btn prev" onClick={onPrevious}>
+            Previous
+          </button>
+        ) : (
+          <></>
+        )}
         <button className="btn next" onClick={onNext}>
           Next
         </button>
