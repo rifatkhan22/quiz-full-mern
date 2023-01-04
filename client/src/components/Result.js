@@ -1,10 +1,20 @@
 import React from "react";
 import "../styles/Result.css";
 import { Link } from "react-router-dom";
+
 import ResultTable from "./ResultTable";
+import { useDispatch } from "react-redux";
+
+//import actions
+import { resetAllAction } from "../redux/question_reducer";
+import { resetResultAction } from "../redux/result_reducer";
+
 export default function Result() {
+  const dispatch = useDispatch();
+
   function onRestart() {
-    console.log("Restart");
+    dispatch(resetAllAction());
+    dispatch(resetResultAction());
   }
   return (
     <div className="container">
@@ -36,7 +46,7 @@ export default function Result() {
         </div>
       </div>
       <div className="start">
-        <Link className="btn" to={"/"} onClick={onRestart()}>
+        <Link className="btn" to={"/"} onClick={onRestart}>
           Restart
         </Link>
       </div>

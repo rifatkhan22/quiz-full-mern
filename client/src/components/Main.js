@@ -10,10 +10,10 @@ export default function Main() {
 
       <ol>
         <li>There are 10 questions. Please answer all questions</li>
-        <li>For each correct answer, 10 points will be rewarded</li>
+        <li>10 Points for each correct answer</li>
         <li>
-          You can go back and change answers and quiz results will be displayed
-          at the end
+          You can go back and change answers and score will be displayed at the
+          end
         </li>
       </ol>
 

@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 //custom hook
 import { useFetchQuestion } from "../hooks/FetchQuestion";
-export default function Questions() {
+import { updateResult } from "../hooks/setResult";
+
+export default function Questions({ onChecked }) {
   const [checked, setChecked] = useState(undefined);
+  const { trace } = useSelector((state) => state.questions);
   const [{ isLoading, apiData, serverError }] = useFetchQuestion(); //will return array
 
   const questions = useSelector(
     (state) => state.questions.queue[state.questions.trace]
   ); //will return array of questions
-  const trace = useSelector((state) => state.questions.trace);
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    //console.log({ trace, checked });
+    dispatch(updateResult({ trace, checked }));
     //console.log(trace);
     //print out two reducers questions and results
     //questions has properties of queue and answers and trace
     //results has UserId and result
-  });
+  }, [checked]);
 
-  function onSelect() {
-    //console.log("Change radio button");
+  function onSelect(i) {
+    onChecked(i);
+    setChecked(i);
   }
   if (isLoading) return <h3 className="text-light">isLoading</h3>;
   if (serverError)
@@ -39,7 +45,7 @@ export default function Questions() {
               value={false}
               name="options"
               id={`q${i}-option`}
-              onChange={onSelect()}
+              onChange={() => onSelect(i)}
             />
 
             <label className="text-primary" htmlFor={`q${i}-option`}>
