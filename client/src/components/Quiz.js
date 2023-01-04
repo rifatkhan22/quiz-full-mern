@@ -6,7 +6,7 @@ export default function Quiz() {
   const state = useSelector((state) => state);
 
   useEffect(() => {
-    //console.log(state);
+    console.log(state);
     //print out two reducers questions and results
     //questions has properties of queue and answers and trace
     //results has UserId and result

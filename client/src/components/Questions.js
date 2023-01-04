@@ -1,28 +1,38 @@
 import React, { useEffect, useState } from "react";
-import data from "../database/data";
+import { useSelector } from "react-redux";
 
 //custom hook
 import { useFetchQuestion } from "../hooks/FetchQuestion";
 export default function Questions() {
   const [checked, setChecked] = useState(undefined);
   const [{ isLoading, apiData, serverError }] = useFetchQuestion(); //will return array
-  const question = data[0];
+
+  const questions = useSelector(
+    (state) => state.questions.queue[state.questions.trace]
+  ); //will return array of questions
+  const trace = useSelector((state) => state.questions.trace);
 
   useEffect(() => {
-    //console.log(isLoading);
-    console.log(apiData);
-    //console.log(serverError);
+    console.log(trace);
+    //print out two reducers questions and results
+    //questions has properties of queue and answers and trace
+    //results has UserId and result
   });
 
   function onSelect() {
     //console.log("Change radio button");
   }
+  if (isLoading) return <h3 className="text-light">isLoading</h3>;
+  if (serverError)
+    return <h3 className="text-light">{serverError || "Unknown"}</h3>;
+
+  //only access the property when we have that property
   return (
     <div className="questions">
-      <h2 className="text-light">{question.question}</h2>
+      <h2 className="text-light">{questions?.question}</h2>
 
-      <ul key={question.id}>
-        {question.options.map((q, i) => (
+      <ul key={questions?.id}>
+        {questions.options.map((q, i) => (
           <li key={i}>
             <input
               type="radio"
