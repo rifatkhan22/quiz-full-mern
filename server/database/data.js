@@ -27,6 +27,25 @@ export default [
       "Which function is used to serialize an object into a JSON string?",
     options: ["stringify()", "parse()", "convert()"],
   },
+  {
+    id: 6,
+    question: "How do you pass data to components from outside in React?",
+    options: ["setState", "PropTypes", "props"],
+  },
+  {
+    id: 7,
+    question: "A state in React.js is also known as?",
+    options: [
+      "internal storage of component",
+      "external storage of component",
+      "permanent storage",
+    ],
+  },
+  {
+    id: 8,
+    question: "In MVC, what does React.js act as?",
+    options: ["Model", "Controller", "Router"],
+  },
 ];
 
-export const answers = [0, 1, 2, 1, 0];
+export const answers = [0, 1, 2, 1, 0, 2, 0, 1, 2, 0];
