@@ -11,7 +11,7 @@ export default function ResultTable() {
         setData(res);
       }
     );
-  });
+  }, []);
 
   return (
     <div>
@@ -19,19 +19,19 @@ export default function ResultTable() {
         <thead className="table-header">
           <tr className="table-row">
             <td>Name</td>
-            <td>Attemps</td>
-            <td>Earn Points</td>
+            <td>Attempts</td>
+            <td>Total Earned Points</td>
             <td>Result</td>
           </tr>
         </thead>
         <tbody>
           {!data ?? <div>No Data Found </div>}
-          {data.map((value, index) => (
-            <tr className="table-body" key={index}>
-              <td>{value?.username || ""}</td>
-              <td>{value?.attempts || 0}</td>
-              <td>{value?.points || 0}</td>
-              <td>{value?.achieved || ""}</td>
+          {data.map((v, i) => (
+            <tr className="table-body" key={i}>
+              <td>{v?.username || ""}</td>
+              <td>{v?.attempts || 0}</td>
+              <td>{v?.points || 0}</td>
+              <td>{v?.achieved || ""}</td>
             </tr>
           ))}
         </tbody>

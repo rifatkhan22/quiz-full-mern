@@ -1,4 +1,6 @@
 import "../styles/App.css";
+//react router
+//routerProvider route objects passed to this to render the app
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 //import components
@@ -7,7 +9,7 @@ import Quiz from "./Quiz";
 import Result from "./Result";
 import { CheckUserExist } from "../helper/helper";
 
-//routes
+// router variable with array of route paths to diff comps
 const router = createBrowserRouter([
   {
     path: "/",

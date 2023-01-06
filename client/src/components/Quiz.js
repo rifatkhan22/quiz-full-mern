@@ -4,9 +4,13 @@ import Questions from "./Questions";
 import { MoveNextQuestion, MovePrevQuestion } from "../hooks/FetchQuestion";
 import { PushAnswer } from "../hooks/setResult";
 
+//redux store import
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
 
+//state will have two reducers
+//questions
+//results
 export default function Quiz() {
   const [check, setChecked] = useState(undefined);
 
@@ -14,39 +18,39 @@ export default function Quiz() {
   const { queue, trace } = useSelector((state) => state.questions);
   const dispatch = useDispatch();
 
-  //next button evt handler
+  /** next button event handler */
   function onNext() {
-    //console.log("On next click");
     if (trace < queue.length) {
-      //will update trace value by one using move next action
+      /** increase the trace value by one using MoveNextAction */
       dispatch(MoveNextQuestion());
 
-      //insert a new result  in the array
+      /** insert a new result in the array.  */
       if (result.length <= trace) {
         dispatch(PushAnswer(check));
       }
     }
 
-    //reset the value of the checked variable
+    /** reset the value of the checked variable */
     setChecked(undefined);
   }
 
-  //previous button evt handler
+  /** Prev button event handler */
   function onPrevious() {
     if (trace > 0) {
+      /** decrease the trace value by one using MovePrevQuestion */
       dispatch(MovePrevQuestion());
     }
   }
 
   function onChecked(check) {
-    console.log(check);
     setChecked(check);
   }
 
-  //finished exam after last question
+  /** finished exam after the last question */
   if (result.length && result.length >= queue.length) {
     return <Navigate to={"/result"} replace={true}></Navigate>;
   }
+
   return (
     <div className="container">
       <h1 className="title text-light">Quiz Application</h1>
@@ -57,7 +61,7 @@ export default function Quiz() {
       <div className="grid">
         {trace > 0 ? (
           <button className="btn prev" onClick={onPrevious}>
-            Prev
+            Back
           </button>
         ) : (
           <div></div>

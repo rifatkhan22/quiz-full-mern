@@ -6,6 +6,7 @@ import { getServerData } from "../helper/helper";
 import * as Action from "../redux/question_reducer";
 
 //fetch question hook to fetch api data and set value to store
+//custom hook so use useprefix
 export const useFetchQuestion = () => {
   const dispatch = useDispatch();
   const [getData, setGetData] = useState({
@@ -14,7 +15,12 @@ export const useFetchQuestion = () => {
     serverError: null,
   });
 
+  //inside useEffect update getData value
+  //return new state
+
   useEffect(() => {
+    //...prev is previous state
+    //will update useState
     setGetData((prev) => ({ ...prev, isLoading: true }));
 
     /** async function fetch backend data */
@@ -29,22 +35,25 @@ export const useFetchQuestion = () => {
           setGetData((prev) => ({ ...prev, isLoading: false }));
           setGetData((prev) => ({ ...prev, apiData: questions }));
 
-          /** dispatch an action */
+          /** dispatch an action and update the store */
           dispatch(Action.startExamAction({ question: questions, answers }));
         } else {
-          throw new Error("No Question Avalibale");
+          throw new Error("No Question Avaliable");
         }
       } catch (error) {
         setGetData((prev) => ({ ...prev, isLoading: false }));
         setGetData((prev) => ({ ...prev, serverError: error }));
       }
     })();
-  }, [dispatch]);
+  }, [dispatch]); // pass in dispatch as 2nd arg(dependency) otherwise useEffect will continously loop
 
   return [getData, setGetData];
 };
 
 /** MoveAction Dispatch function */
+//useDispatch is only accesible by a hook
+//but want to dispatch an action
+//so return another function wit dispatch argument-> dispatch action
 export const MoveNextQuestion = () => async (dispatch) => {
   try {
     dispatch(Action.moveNextAction()); /** increase trace by 1 */

@@ -1,7 +1,9 @@
 import { postServerData } from "../helper/helper";
 import * as Action from "../redux/result_reducer";
+//going to use dispatch so return another function
 export const PushAnswer = (result) => async (dispatch) => {
   try {
+    //push result value from user to result array
     await dispatch(Action.pushResultAction(result));
   } catch (error) {
     console.log(error);
