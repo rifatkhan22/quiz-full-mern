@@ -1,5 +1,5 @@
 # quiz-full-mern
-Welcome to the quiz application
+Welcome to the Quiz Application
 
 There will be 8 questions that the user needs to answer. At the end of the quiz, the quiz result will be displayed. This result will be saved to MongoDB database for each unique user.
 
